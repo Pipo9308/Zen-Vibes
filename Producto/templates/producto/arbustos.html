@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <link href="{% static 'producto/CSS/style.css' %}" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="carrito.js"></script>
+  <title>Tecnologia</title>
+</head>
+<body>
+
+ <!-- Inicio de la barra de navegación -->
+<nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+  <!-- Este es el logo o nombre de la página web -->
+  <img src="{% static "producto/IMG/Helen (2).png" %}" alt="" style="width: 100px;">
+  <a class="navbar-brand text-white" href="#"><strong>Zen Vibes</strong></a>
+  <!-- Este botón aparece cuando la pantalla es pequeña (responsive design) -->
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <!-- Aquí están los enlaces de la barra de navegación -->
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav me-auto">
+      <!-- Cada 'li' es un enlace en la barra de navegación -->
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url "index" %}"><strong>Inicio</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url "brotes" %}"><strong>Hogar</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url "arbustos" %}"><strong>Tecnologia</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url "sustrato" %}"><strong>Salud y Belleza</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url "macetero" %}"><strong>Juguetes</strong></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-white" href="{% url "nosotros" %}"><strong>Nosotros</strong></a>
+      </li>
+    </ul>
+    <!-- Iconos de usuario y carrito alineados a la derecha -->
+    <a href="{% url "login" %}" class="navbar-text text-white ms-auto me-3" id="userIcon">
+      <i class="fas fa-user"></i> <span id="usernameDisplay"></span>
+    </a>
+    <span class="navbar-text text-white me-3" id="cartIcon" data-bs-toggle="modal" style="cursor: pointer;">
+      <a href="{% url 'cart:view_cart' %}" class="text-decoration-none text-white">
+        <i class="fa fa-shopping-cart"></i>
+      </a>
+    </span>    
+  </div>
+</nav>
+<!-- Fin de la barra de navegación -->
+  
+  <!-- Titulo Producto -->
+  <h1 class="heading"> <span> Tecnologia </span></h1>
+
+   <!--  Inicio Cards -->
+   <div class="container mt-5">
+    <div class="row d-flex align-items-stretch">
+  <!-- Primera card -->
+  <div class="col-md-4">
+    <div class="card h-100">
+        <img src="{% static 'producto/IMG/218288-1600-1600.webp' %}" class="card-img-top" alt="Imagen del producto">
+        <div class="card-body d-flex flex-column">
+            <h5 class="card-title">Teclado Inalámbrico - Plateado - 285*120 Mm</h5>
+            <p class="card-text">Teclado Inalámbrico - Plateado - 285*120 Mm</p>
+            <div class="mt-auto">
+                <p class="card-price">Precio: $15.990</p>
+                <p class="card-availability"><strong>Disponibilidad:</strong> 
+                    {% for product in products %}
+                        {% if product.id == 7 %}
+                            {{ product.stock }} Unidades
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                <div class="text-center">
+                  <form action="{% url 'cart:add_to_cart' %}" method="post" class="add-to-cart-form">
+                      {% csrf_token %}
+                      <input type="hidden" name="product_id" value="7">
+                      <input type="hidden" name="quantity" value="1">
+                      <button type="submit" class="btn btn-success mt-3">Agregar al carrito</button>
+                  </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <!-- Segunda card -->
+        <div class="col-md-4">
+            <!-- Card -->
+            <div class="card h-100">
+                <!-- Imagen -->
+                <img src="{% static "producto/IMG/241496-1600-1600.webp" %}" class="card-img-top" alt="Imagen del producto">
+                <div class="card-body d-flex flex-column">
+                    <!-- Nombre -->
+                    <h5 class="card-title">Audífonos Inalámbricos Con Estuche De Carga TWS Negros</h5>
+                    <!-- Descripcion -->
+                    <p class="card-text">Zen Vibes tiene para ti estos audífonos inalámbricos en color negro, te otorgan un diseño elegante y sofisticado que se ajustara a todo tipo de estilos y necesidades ¡Disfruta de tu música favorita de manera cómoda y sin cables!</p>
+                    <!-- Contenedor -->
+                    <div class="mt-auto">
+                      <!-- Precio -->
+                      <p class="card-price">Precio: $17.990</p>
+                      <!-- Disponibilidad -->
+                      <p class="card-availability"><strong>Disponibilidad:</strong> 
+                        {% for product in products %}
+                            {% if product.id == 8 %}
+                                {{ product.stock }} Unidades
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                      <!-- Boton para agregar al carrito -->
+                      <div class="text-center">
+                        <button class="btn btn-danger">Agotado</button>
+                      </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Tercera card -->
+        <div class="col-md-4">
+        <!-- Card -->
+        <div class="card h-100">
+            <!-- Imagen -->
+            <img src="{% static "producto/IMG/224274-1600-1600.webp" %}" class="card-img-top" alt="Imagen del producto">
+           
+            <div class="card-body d-flex flex-column">
+                <!-- Nombre -->
+                <h5 class="card-title">Estuche Para Airpods Mini Family Azul MINI FAMILY SERIES</h5>
+                <!-- Descripcion -->
+                <p class="card-text">Diseño de nuestro hermoso señor pinguino .
+                  Diseño exclusivo, elegante y muy llamativo.</p>
+                <!-- Contenedor -->
+                <div class="mt-auto">
+                  <!-- Precio -->
+                  <p class="card-price">Precio: $2.990</p>
+                  <!-- Disponibilidad -->
+                  <p class="card-availability"><strong>Disponibilidad:</strong> 
+                    {% for product in products %}
+                        {% if product.id == 9 %}
+                            {{ product.stock }} Unidades
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                  <!-- Boton para agregar al carrito -->
+                  <div class="text-center">
+                    <form action="{% url 'cart:add_to_cart' %}" method="post" class="add-to-cart-form">
+                      {% csrf_token %}
+                      <input type="hidden" name="product_id" value="9">
+                      <input type="hidden" name="quantity" value="1">
+                      <button type="submit" class="btn btn-success mt-3">Agregar al carrito</button>
+                    </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+<div class="container mt-5">
+<div class="row d-flex align-items-stretch">
+    <!-- Primera card -->
+    <div class="col-md-4">
+        <!-- Card -->
+        <div class="card h-100">
+            <!-- Imagen -->
+            <img src="{% static "producto/IMG/207485-1600-1600.webp" %}" class="card-img-top" alt="Imagen del producto">
+            <div class="card-body d-flex flex-column">
+                <!-- Nombre -->
+                <h5 class="card-title">SOPORTE PARA CELULAR TIPO ANILLO - WE BARE BEARS</h5>
+                <!-- Descripcion -->
+                <p class="card-text">SOPORTE PARA CELULAR TIPO ANILLO - WE BARE BEARS</p>
+                <!-- Contenedor -->
+                <div class="mt-auto">
+                  <!-- Precio -->
+                  <p class="card-price">Precio: $2.290</p>
+                  <!-- Disponibilidad -->
+                  <p class="card-availability"><strong>Disponibilidad:</strong> 
+                    {% for product in products %}
+                        {% if product.id == 10 %}
+                            {{ product.stock }} Unidades
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                  <!-- Boton para agregar al carrito -->
+                  <div class="text-center">
+                  <form action="{% url 'cart:add_to_cart' %}" method="post" class="add-to-cart-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="10">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn btn-success mt-3">Agregar al carrito</button>
+                </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Segunda card -->
+    <div class="col-md-4">
+        <!-- Card -->
+        <div class="card h-100">
+            <!-- Imagen -->
+            <img src="{% static "producto/IMG/217035-1600-1600.webp" %}" class="card-img-top" alt="Imagen del producto">
+            <div class="card-body d-flex flex-column">
+                <!-- Nombre -->
+                <h5 class="card-title">Soporte De Celular Broadcast Series</h5>
+                <!-- Descripcion -->
+                <p class="card-text">El Soporte para celular pertence a la línea Broadcast Series.</p>
+                <!-- Contenedor -->
+                <div class="mt-auto">
+                  <!-- Precio -->
+                  <p class="card-price">Precio: $11.990</p>
+                  <!-- Disponibilidad -->
+                  <p class="card-availability"><strong>Disponibilidad:</strong> 
+                    {% for product in products %}
+                        {% if product.id == 11 %}
+                            {{ product.stock }} Unidades
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                  <!-- Boton para agregar al carrito -->
+                  <div class="text-center">
+                  <form action="{% url 'cart:add_to_cart' %}" method="post" class="add-to-cart-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="11">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn btn-success mt-3">Agregar al carrito</button>
+                </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Tercera columna para la tercera tarjeta -->
+    <div class="col-md-4">
+        <!-- Card -->
+        <div class="card h-100">
+            <!-- Imagen de la card -->
+            <img src="{% static "producto/IMG/217036-1600-1600.webp" %}" class="card-img-top" alt="Imagen del producto">
+            <div class="card-body d-flex flex-column">
+                <!-- Nombre de la card -->
+                <h5 class="card-title">Soporte Para Celular Con Seguro Negro</h5>
+                <!-- Descripcion de la card -->
+                <p class="card-text">Este Soporte para Celular con Seguro lo encuentras en color negro.</p>
+                <!-- Contenedor -->
+                <div class="mt-auto">
+                  <!-- Precio -->
+                  <p class="card-price">Precio: $4.800</p>
+                  <!-- Disponibilidad -->
+                  <p class="card-availability"><strong>Disponibilidad:</strong> 
+                    {% for product in products %}
+                        {% if product.id == 12 %}
+                            {{ product.stock }} Unidades
+                        {% endif %}
+                    {% endfor %}
+                </p>
+                  <!-- Boton para agregar al carrito -->
+                  <div class="text-center">
+                  <form action="{% url 'cart:add_to_cart' %}" method="post" class="add-to-cart-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="product_id" value="12">
+                    <input type="hidden" name="quantity" value="1">
+                    <button type="submit" class="btn btn-success mt-3">Agregar al carrito</button>
+                </form>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!--  Fin Cards -->
+
+   <!-- Footer -->
+   <footer class="bg-success text-light py-2">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mt-2">
+          <h5>Contacto</h5>
+          <ul class="list-unstyled text-light">
+            <li><i class="fa-solid fa-house me-2"></i>Dirección: Avenida Siempreviva #742, Springfield</i></li>
+            <li><i class="fa-solid fa-phone me-2"></i>Teléfono: +123 456 789 </i></li>
+            <li><i class="fa-solid fa-envelope me-2"></i>Correo Electrónico: info@zenvibes.com</i></li>
+            <li><i class="fa-solid fa-circle-question me-2"></i></i>Ayuda</i></li>
+        </ul>
+        </div>
+        <div class="col-md-4 mt-2">
+          <h5>Redes Sociales</h5>
+          <ul class="list-unstyled">
+            <li><a href="https://www.facebook.com" class="text-light"><i class="fab fa-facebook-f me-2"></i>Facebook</a></li>
+            <li><a href="https://www.x.com" class="text-light"><i class="fab fa-twitter me-2"></i>Twitter</a></li>
+            <li><a href="https://www.instagram.com" class="text-light"><i class="fab fa-instagram me-2"></i>Instagram</a></li>
+          </ul>
+        </div>
+        <div class="col-md-4 mt-2">
+          <h5>Categorias</h5>
+          <ul class="list-unstyled text-light">
+              <li> Hogar </li>
+              <li> Tecnologia </li>
+              <li> Salud y Belleza </li>
+              <li> Jugetes </li>
+          </ul>
+      </div>
+      </div>
+    </div>
+  </footer>
+  
+
+  <!-- Bootstrap -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+  <!-- Javascript -->
+  <script src="script.js"></script>
+</body>
+</html>
